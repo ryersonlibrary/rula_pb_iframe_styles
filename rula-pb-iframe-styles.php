@@ -9,7 +9,22 @@
  * Version: 0.0.2
  */
 
-/*
+// Include our custom settings page for the plugin
+require_once plugin_dir_path( __FILE__ ).'/inc/rula-pb-iframe-styles-settings.php';
+
+/**
+ * Enqueues scripts necessary to use media JavaScript APIs.
+ */
+function rula_pb_iframe_enqueue_media_scripts() {
+  wp_enqueue_media();
+  wp_register_script( 'rula-pb-iframe-media-uploader-js', plugin_dir_url( __FILE__ ).'/inc/js/media-uploader.js', array('jquery'), '1.0.0', true );
+  wp_enqueue_script( 'rula-pb-iframe-media-uploader-js' );
+  wp_register_style( 'rula-pb-iframe-style', plugin_dir_url( __FILE__ ).'/inc/css/style.css', array(), '1.0.0' );
+  wp_enqueue_style( 'rula-pb-iframe-style' );
+}
+add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_enqueue_media_scripts' );
+
+/**
  * Inserts the script to hide the unwanted elements at the end of the <head>  * tag.
  */
 function rula_pb_iframe_print_script() {
@@ -31,6 +46,5 @@ function rula_pb_iframe_print_script() {
     })
   </script>
 script;
-
 }
 add_action( 'wp_head', 'rula_pb_iframe_print_script');
