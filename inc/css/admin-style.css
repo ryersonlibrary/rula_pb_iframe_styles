@@ -1,0 +1,8 @@
+#rula_pb_iframe-watermark_preview {
+  width: 150px; 
+  height: 150px;
+  overflow: hidden;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
