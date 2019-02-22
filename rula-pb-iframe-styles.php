@@ -22,7 +22,7 @@ function rula_pb_iframe_admin_enqueue_scripts() {
   wp_register_style( 'rula-pb-iframe-admin-style', plugin_dir_url( __FILE__ ).'/inc/css/admin-style.css', array(), '1.0.0' );
   wp_enqueue_style( 'rula-pb-iframe-admin-style' );
 }
-add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_enqueue_media_scripts' );
+add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_admin_enqueue_scripts' );
 
 /**
  * Registers and enqueues scripts and styles for front-end display.

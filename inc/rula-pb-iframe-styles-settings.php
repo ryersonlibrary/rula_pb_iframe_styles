@@ -75,7 +75,7 @@ function rula_pb_iframe_watermark_callback( $args ) {
   $setting_value = esc_attr( get_option( 'rula_pb_iframe-watermark' ) );
   echo <<<setting_html
   <div id="rula_pb_iframe-watermark_preview" style="background-image: url('{$setting_value}');"></div>
-  <input type="button" value="Upload watermark" id="rula_pb_iframe-upload_watermark_button">
+  <input type="button" value="Select watermark" id="rula_pb_iframe-select_watermark_button">
   <input type="hidden" id="{$setting_id}" name="{$setting_id}" value="{$setting_value}" />
   <p class="description">{$args[0]}</p>
 setting_html;

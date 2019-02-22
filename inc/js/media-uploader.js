@@ -1,8 +1,8 @@
 jQuery(document).ready( function($){
-  console.log("HELLO");
+
   var mediaUploader;
   
-  $('#rula_pb_iframe-upload_watermark_button').on('click',function(e) {
+  $('#rula_pb_iframe-select_watermark_button').on('click',function(e) {
     e.preventDefault();
     
     if( mediaUploader ){
@@ -11,9 +11,9 @@ jQuery(document).ready( function($){
     }
     
     mediaUploader = wp.media.frames.file_frame = wp.media({
-      title: 'Select a Picture',
+      title: 'Select an image',
       button: {
-        text: 'Select Picture'
+        text: 'Select image'
       },
       multiple: false
     });
