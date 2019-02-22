@@ -8,7 +8,11 @@
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
  * Version: 0.0.2
  */
-function rula_pb_print_iframe_script() {
+
+/*
+ * Inserts the script to hide the unwanted elements at the end of the <head>  * tag.
+ */
+function rula_pb_iframe_print_script() {
   $html = '';
   $html .= '<script type="text/javascript">';
     $html .= 'jQuery( document ).ready( function() {';
@@ -19,4 +23,4 @@ function rula_pb_print_iframe_script() {
   $html .= '</script>';
   echo $html;
 }
-add_action( 'wp_head', 'rula_pb_print_iframe_script');
+add_action( 'wp_head', 'rula_pb_iframe_print_script');
