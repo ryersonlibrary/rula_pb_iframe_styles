@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ryersonlibrary
  * Description: Hides the header and footer when Pressbooks is loaded within an iframe.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
- * Version: 0.2.0
+ * Version: 0.2.1
  */
 
 // Include our custom settings page for the plugin
@@ -25,29 +25,12 @@ function rula_pb_iframe_admin_enqueue_scripts() {
 add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_admin_enqueue_scripts' );
 
 /**
- * Registers and enqueues scripts and styles for front-end display.
- */
-function rula_pb_iframe_enqueue_scripts() {
-  wp_register_style( 'rula-pb-iframe-style', plugin_dir_url( __FILE__ ).'/inc/css/style.css', array(), '1.0.0' );
-  wp_enqueue_style( 'rula-pb-iframe-style' );
-}
-// add_action('wp_enqueue_scripts', 'rula_pb_iframe_enqueue_scripts');
-
-/**
  * Returns the HTML code for the watermark.
  */
 function rula_pb_iframe_watermark_html() {
   $watermark = esc_attr( get_option( 'rula_pb_iframe-watermark' ) );
   return "<img id=\"rula_pb_iframe-watermark\" src=\"{$watermark}\">";
 }
-
-/**
- * Inserts the watermark at the bottom of the main content.
- */
-function rula_pb_iframe_the_content_watermark_filter($content) {
-  return $content . rula_pb_iframe_watermark_html();
-}
-// add_filter( 'the_content', 'rula_pb_iframe_the_content_watermark_filter' );
 
 /**
  * Inserts the script to hide the unwanted elements at the end of the <head> tag and unhides the
@@ -62,10 +45,6 @@ function rula_pb_iframe_print_script() {
     '.nav-reading',
     '.part-title'
   ));
-  
-  $show_classes = implode(',', array(
-    '#rula_pb_iframe-watermark'
-  ));
 
   $watermark_html = rula_pb_iframe_watermark_html();
 
@@ -74,8 +53,6 @@ function rula_pb_iframe_print_script() {
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
         jQuery("{$hide_classes}").hide();
-        // jQuery("{$show_classes}").show();
-        jQuery(".site-content").append('{$watermark_html}');
         jQuery("#content").append('{$watermark_html}');
       }
     })
