@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ryersonlibrary
  * Description: Hides the header and footer when Pressbooks is loaded within an iframe.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
- * Version: 0.2.1
+ * Version: 0.3.0
  */
 
 // Include our custom settings page for the plugin
@@ -41,23 +41,52 @@ function rula_pb_iframe_print_script() {
     '.a11y-toolbar',
     '.header',
     '.footer--reading',
+    '.footer--home',
     '.block-reading-meta',
-    '.nav-reading',
     '.part-title'
+  ));
+
+  $hide_nav = implode(',', array(
+    '.nav-reading'
   ));
 
   $watermark_html = rula_pb_iframe_watermark_html();
 
   echo <<<script
   <script type="text/javascript">
+    function urlParam(name) {
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      if (results==null) {
+         return null;
+      }
+      return decodeURI(results[1]) || 0;
+    }
+
+    function hostnameFromUrl(url) {
+      var matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+      return matches[1];
+    }
+
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
-        jQuery("{$hide_classes}").hide();
+        if ( urlParam('show_full_book') == 'true' ) {
+          jQuery("{$hide_classes}").hide();
+
+          jQuery("body").on("click", "a[href]", function(e) {
+            var url = jQuery(this).attr("href")
+            if ( hostnameFromUrl(url) == hostnameFromUrl(window.location.href) ) {
+              e.preventDefault();
+              window.location = url + "?show_full_book=true";
+            }
+          });
+        } else {
+          jQuery("{$hide_classes}").hide();
+          jQuery("{$hide_nav}").hide();
+        }
         jQuery("#content").append('{$watermark_html}');
       }
-    })
+    });
   </script>
 script;
 }
 add_action( 'wp_head', 'rula_pb_iframe_print_script');
-
