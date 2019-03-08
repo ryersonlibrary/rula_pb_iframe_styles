@@ -69,14 +69,14 @@ function rula_pb_iframe_print_script() {
 
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
-        if ( urlParam('show_full_book') == 'true' ) {
+        if ( urlParam('show_nav') == 'true' ) {
           jQuery("{$hide_classes}").hide();
 
           jQuery("body").on("click", "a[href]", function(e) {
             var url = jQuery(this).attr("href")
             if ( hostnameFromUrl(url) == hostnameFromUrl(window.location.href) ) {
               e.preventDefault();
-              window.location = url + "?show_full_book=true";
+              window.location = url + "?show_nav=true";
             }
           });
         } else {
