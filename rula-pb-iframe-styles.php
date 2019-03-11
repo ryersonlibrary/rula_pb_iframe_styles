@@ -37,33 +37,35 @@ function rula_pb_iframe_watermark_html() {
  * watermark.
  */
 function rula_pb_iframe_print_script() {
-  $hide_classes = implode(',', array(
-    '.a11y-toolbar',
-    '.header__inside',
-    '.footer--reading',
-    '.footer--home',
-    '.block-reading-meta',
-    '.part-title'
-  ));
-
-  $hide_nav = implode(',', array(
-    'reading-header',
-    '.nav-reading'
-  ));
-
   $watermark_html = rula_pb_iframe_watermark_html();
 
   echo <<<script
   <style>
-    @media screen and (max-width: 960px) {
+    .in-iframe .a11y-toolbar,
+    .in-iframe .header__inside,
+    .in-iframe .footer--home,
+    .in-iframe .footer--reading,
+    .in-iframe .block-reading-meta,
+    .in-iframe .part-title,
+    .in-iframe .reading-header,
+    .in-iframe .nav-reading, {
+      display: none!important;
+    }
+
+    .in-iframe .show-nav .reading-header,
+    .in-iframe .show-nav .nav-reading {
+      display: block!important;
+    }
+
+    @media screen and (max-width: 959px) {
       .in-iframe .header {
-        padding: 0;
+        padding: 0!important;
       }
       .in-iframe .reading-header {
-        margin-top: 0;
+        margin-top: 0!important;
       }
       .in-iframe .site-content {
-        margin-top: 1rem;
+        margin-top: 1rem!important;
       }
     }
   </style>
@@ -85,8 +87,9 @@ function rula_pb_iframe_print_script() {
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
         jQuery("body").addClass("in-iframe");
+
         if ( urlParam('show_nav') == 'true' ) {
-          jQuery("{$hide_classes}").hide();
+          jQuery("body").addClass("show-nav");
 
           jQuery("body").on("click", "a[href]", function(e) {
             var url = jQuery(this).attr("href")
@@ -95,10 +98,8 @@ function rula_pb_iframe_print_script() {
               window.location = url + "?show_nav=true";
             }
           });
-        } else {
-          jQuery("{$hide_classes}").hide();
-          jQuery("{$hide_nav}").hide();
         }
+
         jQuery("#content").append('{$watermark_html}');
       }
     });
