@@ -1,3 +1,29 @@
-#rula_pb_iframe-watermark {
-  display: none;
+.in-iframe .a11y-toolbar,
+.in-iframe .header__inside,
+.in-iframe .footer--home,
+.in-iframe .footer--reading,
+.in-iframe .block-reading-meta,
+.in-iframe .part-title,
+.in-iframe .reading-header,
+.in-iframe .reading-header,
+.in-iframe .nav-reading {
+  display: none!important;
+}
+
+.in-iframe.show-nav .reading-header,
+.in-iframe.show-nav .nav-reading {
+  display: block!important;
+}
+
+@media screen and (max-width: 959px) {
+  .in-iframe .header {
+    padding: 0!important;
+  }
+  .in-iframe:not(.home) .reading-header {
+    margin-top: 0!important;
+  }
+  .in-iframe:not(.home) .site-content {
+    margin-top: 1rem!important;
+    margin-bottom: 7rem!important;
+  }
 }

@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ryersonlibrary
  * Description: Hides the header and footer when Pressbooks is loaded within an iframe.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
- * Version: 0.3.7
+ * Version: 0.3.8
  */
 
 // Include our custom settings page for the plugin
@@ -24,6 +24,12 @@ function rula_pb_iframe_admin_enqueue_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_admin_enqueue_scripts' );
 
+function rula_pb_iframe_enqueue_scripts() {
+  wp_register_style( 'rula-pb-iframe-style', plugin_dir_url( __FILE__ ).'/inc/css/style.css', array(), '0.3.8' );
+  wp_enqueue_style( 'rula-pb-iframe-style' );
+}
+add_action('wp_enqueue_scripts', 'rula_pb_iframe_enqueue_scripts');
+
 /**
  * Returns the HTML code for the watermark.
  */
@@ -40,37 +46,6 @@ function rula_pb_iframe_print_script() {
   $watermark_html = rula_pb_iframe_watermark_html();
 
   echo <<<script
-  <style>
-    .in-iframe .a11y-toolbar,
-    .in-iframe .header__inside,
-    .in-iframe .footer--home,
-    .in-iframe .footer--reading,
-    .in-iframe .block-reading-meta,
-    .in-iframe .part-title,
-    .in-iframe .reading-header,
-    .in-iframe .nav-reading {
-      display: none!important;
-    }
-
-    .in-iframe.show-nav .reading-header,
-    .in-iframe.show-nav .nav-reading {
-      display: block!important;
-    }
-
-    @media screen and (max-width: 959px) {
-      .in-iframe .header {
-        padding: 0!important;
-      }
-      .in-iframe:not(.home) .reading-header {
-        margin-top: 0!important;
-      }
-      .in-iframe:not(.home) .site-content {
-        margin-top: 1rem!important;
-        margin-bottom: 7rem!important;
-      }
-    }
-  </style>
-
   <script type="text/javascript">
     function urlParam(name) {
       var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
