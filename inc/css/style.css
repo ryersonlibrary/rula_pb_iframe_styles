@@ -15,15 +15,24 @@
   display: block!important;
 }
 
-@media screen and (max-width: 959px) {
-  .in-iframe .header {
-    padding: 0!important;
-  }
-  .in-iframe:not(.home) .reading-header {
-    margin-top: 0!important;
-  }
-  .in-iframe:not(.home) .site-content {
-    margin-top: 1rem!important;
-    margin-bottom: 7rem!important;
-  }
+.in-iframe .header {
+  padding: 0!important;
+}
+
+.in-iframe .reading-header__title,
+.in-iframe .reading-header__toc {
+  border: none!important;
+}
+
+.in-iframe:not(.home) .reading-header {
+  margin-top: 0!important;
+}
+
+.in-iframe:not(.home) .site-content {
+  margin-top: 1rem!important;
+  margin-bottom: 7rem!important;
+}
+
+#rula_pb_iframe-watermark {
+  margin-top: 1.5rem;
 }
