@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ryersonlibrary
  * Description: Hides the header and footer when Pressbooks is loaded within an iframe.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
- * Version: 0.3.2
+ * Version: 0.3.3
  */
 
 // Include our custom settings page for the plugin
@@ -54,6 +54,20 @@ function rula_pb_iframe_print_script() {
   $watermark_html = rula_pb_iframe_watermark_html();
 
   echo <<<script
+  <style>
+    @media screen and (max-width: 960px) {
+      .in-iframe .header {
+        padding: 0;
+      }
+      .in-iframe .reading-header {
+        margin-top: 0;
+      }
+      .in-iframe .site-content {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+
   <script type="text/javascript">
     function urlParam(name) {
       var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -70,9 +84,9 @@ function rula_pb_iframe_print_script() {
 
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
+        jQuery("body").addClass("in-iframe");
         if ( urlParam('show_nav') == 'true' ) {
           jQuery("{$hide_classes}").hide();
-          jQuery(".reading-header").css('margin-top', 0)
 
           jQuery("body").on("click", "a[href]", function(e) {
             var url = jQuery(this).attr("href")
@@ -85,7 +99,6 @@ function rula_pb_iframe_print_script() {
           jQuery("{$hide_classes}").hide();
           jQuery("{$hide_nav}").hide();
         }
-        jQuery(".header").css("padding", 0)
         jQuery("#content").append('{$watermark_html}');
       }
     });
