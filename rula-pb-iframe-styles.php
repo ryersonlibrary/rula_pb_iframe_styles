@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ryersonlibrary
  * Description: Hides the header and footer when Pressbooks is loaded within an iframe.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rula_pb_iframe_styles
- * Version: 0.3.12
+ * Version: 0.3.13
  */
 
 // Include our custom settings page for the plugin
@@ -62,8 +62,6 @@ function rula_pb_iframe_print_script() {
 
     jQuery( document ).ready( function() {
       if ( window.self != window.top ) {
-        jQuery(document).off('keydown');
-
         jQuery("body").addClass("in-iframe");
 
         if ( urlParam('show_nav') == 'true' ) {
@@ -85,3 +83,14 @@ function rula_pb_iframe_print_script() {
 script;
 }
 add_action( 'wp_head', 'rula_pb_iframe_print_script');
+
+function rula_pb_iframe_wp_footer() {
+  echo <<<script
+  <script type="text/javascript">
+    jQuery( document ).ready( function() {
+      jQuery(document).off('keydown');
+    });
+  </script>
+script;
+}
+add_action( 'wp_footer', 'rula_pb_iframe_wp_footer');
