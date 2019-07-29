@@ -31,6 +31,7 @@
 .in-iframe:not(.home) .site-content {
   margin-top: 1rem!important;
   margin-bottom: 7rem!important;
+  width: 100%!important;
 }
 
 #rula_pb_iframe-watermark {
