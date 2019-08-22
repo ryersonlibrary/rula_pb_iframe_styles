@@ -25,7 +25,7 @@ function rula_pb_iframe_admin_enqueue_scripts() {
 add_action( 'admin_enqueue_scripts', 'rula_pb_iframe_admin_enqueue_scripts' );
 
 function rula_pb_iframe_enqueue_scripts() {
-  wp_register_style( 'rula-pb-iframe-style', plugin_dir_url( __FILE__ ).'/inc/css/style.css', array(), '0.3.14' );
+  wp_register_style( 'rula-pb-iframe-style', plugin_dir_url( __FILE__ ).'/inc/css/style.css', array(), '0.3.15' );
   wp_enqueue_style( 'rula-pb-iframe-style' );
 }
 add_action('wp_enqueue_scripts', 'rula_pb_iframe_enqueue_scripts');
