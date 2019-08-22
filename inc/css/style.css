@@ -34,6 +34,11 @@
   width: 100%!important;
 }
 
+.in-iframe .h5p-container iframe {
+  margin: 0!important;
+  width: 100%!important;
+}
+
 #rula_pb_iframe-watermark {
   margin: 1.5rem;
 }
