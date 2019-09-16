@@ -42,6 +42,8 @@ body:not(.home) #rula_pb_iframe-watermark {
   margin: 1.5rem 0 0 0
 }
 
+.in-iframe.hide-chapter-heading .back-matter header,
+.in-iframe.hide-chapter-heading .front-matter header,
 .in-iframe.hide-chapter-heading .chapter header {
   display: none;
 }
